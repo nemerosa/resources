@@ -1,0 +1,29 @@
+plugins {
+    id 'net.nemerosa.versioning' version '1.5.0'
+}
+
+apply plugin: 'java'
+
+/**
+ * Meta information
+ */
+
+group = 'net.nemerosa'
+version = versioning.info.display
+
+/**
+ * Dependencies
+ */
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.projectlombok:lombok:1.14.4'
+}
+
+/**
+ * Wrapper definition
+ */
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.4'
+}
