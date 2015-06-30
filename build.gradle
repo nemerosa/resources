@@ -3,7 +3,6 @@ plugins {
 }
 
 apply plugin: 'java'
-apply plugin: 'groovy'
 
 /**
  * Meta information
@@ -25,7 +24,6 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
     compile 'org.projectlombok:lombok:1.14.4'
 
-    testCompile 'org.codehaus.groovy:groovy-all:2.4.3'
     testCompile 'junit:junit:4.11'
 }
 
