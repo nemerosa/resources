@@ -48,10 +48,10 @@ build
         }
     }
     publishers {
-        archiveJunit("build/test-results/*.xml")
+        archiveJunit("**/build/test-results/*.xml")
         tasks(
                 '**/*.java,**/*.groovy,**/*.xml,**/*.html,**/*.js',
-                'build/**,seed/**',
+                '**/build/**,seed/**',
                 'FIXME', 'TODO', '@Deprecated', true
         )
     }
