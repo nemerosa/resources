@@ -26,12 +26,28 @@ ext {
     ]
 }
 
-allprojects {
+subprojects {
 
     repositories {
         mavenCentral()
     }
 
+}
+
+/**
+ * Publication
+ */
+
+subprojects {
+    apply plugin: 'maven-publish'
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 }
 
 /**
