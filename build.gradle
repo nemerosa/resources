@@ -3,6 +3,7 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 
 /**
  * Meta information
@@ -15,9 +16,17 @@ version = versioning.info.display
  * Dependencies
  */
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
     compile 'org.projectlombok:lombok:1.14.4'
+
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.3'
+    testCompile 'junit:junit:4.11'
 }
 
 /**
