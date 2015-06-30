@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+dependencies {
+    compile libraries.commons_lang
+    compile libraries.jackson_databind
+    compile libraries.lombok
+
+    testCompile libraries.junit
+}
