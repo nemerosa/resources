@@ -51,7 +51,7 @@ build
         archiveJunit("build/test-results/*.xml")
         tasks(
                 '**/*.java,**/*.groovy,**/*.xml,**/*.html,**/*.js',
-                '**/target/**,**/node_modules/**,**/vendor/**',
+                'build/**,seed/**',
                 'FIXME', 'TODO', '@Deprecated', true
         )
     }
