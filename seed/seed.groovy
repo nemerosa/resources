@@ -89,6 +89,7 @@ versionDisplay
 versionFile
 build
 uploadArchives
+closeAndPromoteRepository
 -x test
 -Prelease
 --info
