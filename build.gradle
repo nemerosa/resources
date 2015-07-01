@@ -92,6 +92,32 @@ if (project.hasProperty('release')) {
                     repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                         authentication(userName: ossrhUser, password: ossrhPassword)
                     }
+                    pom.project {
+                        packaging 'jar'
+                        url 'https://github.com/nemerosa/resources'
+
+                        scm {
+                            connection 'scm:git:https://github.com/nemerosa/resources.git'
+                            developerConnection 'scm:git:git@github.com:nemerosa/resources.git'
+                            url 'https://github.com/nemerosa/resources.git'
+                        }
+
+                        licenses {
+                            license {
+                                name 'The MIT License (MIT)'
+                                url 'http://opensource.org/licenses/MIT'
+                                distribution 'repo'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id = 'dcoraboeuf'
+                                name = 'Damien Coraboeuf'
+                                email = 'damien.coraboeuf@gmail.com'
+                            }
+                        }
+                    }
                 }
             }
         }
