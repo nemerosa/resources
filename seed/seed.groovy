@@ -90,6 +90,7 @@ versionFile
 build
 publish
 -x test
+-Prelease
 --info
 --stacktrace
 --profile

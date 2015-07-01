@@ -23,6 +23,14 @@ signing.secretKeyRingFile=<path to your key ring>
 
 > :warning: Do not ever put such information in Git! This must stay local to your build environment and protected.
 
+In order to get this information, run:
+
+```bash
+gpg -K
+```
+
+The key ring file path is the first line. The key ID is the string after the / in the `sec` line.
+
 #### Publication configuration
 
 The OSSRH credentials must be available in the `~/.gradle/gradle.properties` file:
