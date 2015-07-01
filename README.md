@@ -33,9 +33,17 @@ ossrhUser = <OSSRH user>
 ossrhPassword = <OSSRH password>
 ```
 
-Run the following command to publish in a staging repository at https://oss.sonatype.org.
-
 #### Promotion configuration
+
+#### Release
+
+Run the following command to publish in a staging repository at https://oss.sonatype.org:
+
+```bash
+./gradlew clean build publish -Prelease
+```
+
+The `release` property enables the signature and the upload.
 
 ## History
 
