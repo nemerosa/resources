@@ -1,6 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
+    }
+}
+
 plugins {
     id 'net.nemerosa.versioning' version '1.5.0'
 }
+
+apply plugin: 'io.codearte.nexus-staging'
 
 /**
  * Meta information
@@ -39,6 +50,7 @@ subprojects {
  */
 
 subprojects {
+    apply plugin: 'java'
     apply plugin: 'maven-publish'
 
     publishing {
@@ -47,6 +59,16 @@ subprojects {
                 from components.java
             }
         }
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
     }
 }
 

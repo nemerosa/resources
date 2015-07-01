@@ -1,5 +1,3 @@
-apply plugin: 'java'
-
 dependencies {
     compile project(':resources')
     compile libraries.spring_webmvc
