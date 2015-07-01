@@ -111,3 +111,13 @@ publish
         }
     }
 }
+
+deliveryPipelineView('Pipeline') {
+    pipelineInstances(4)
+    enableManualTriggers()
+    showChangeLog()
+    updateInterval(5)
+    pipelines {
+        component("resources-${SEED_BRANCH}", "${SEED_PROJECT}-${SEED_BRANCH}-build")
+    }
+}
