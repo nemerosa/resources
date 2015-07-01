@@ -100,10 +100,10 @@ publish
             environmentVariables {
                 propertiesFile 'build/version.properties'
             }
-            shell """\
+            shell '''\
 git tag ${VERSION_DISPLAY}
 git push origin ${VERSION_DISPLAY}
-"""
+'''
         }
         publishers {
             buildDescription('', '${VERSION_DISPLAY} (${VERSION_FULL})', '', 'n/a')
