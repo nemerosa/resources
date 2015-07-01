@@ -88,7 +88,7 @@ clean
 versionDisplay
 versionFile
 build
-publish
+uploadArchives
 -x test
 -Prelease
 --info

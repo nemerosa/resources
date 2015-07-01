@@ -65,41 +65,37 @@ if (project.hasProperty('release')) {
             from sourceSets.main.allSource
         }
 
+        artifacts {
+            archives javadocJar, sourcesJar
+        }
+    }
+
+    allprojects {
+
         // Signature of artifacts
 
         apply plugin: 'signing'
+        apply plugin: 'maven'
 
         signing {
-            sign jar
-            sign javadocJar
-            sign sourcesJar
+            sign configurations.archives
         }
 
         // OSSRH publication
 
-        apply plugin: 'maven-publish'
-
-        publishing {
-            publications {
-                mavenJava(MavenPublication) {
-                    from components.java
-                    artifact sourcesJar
-                    artifact javadocJar
-                    artifact source: signJar.outputs.files.singleFile, extension: 'jar.asc'
-                    artifact source: signJavadocJar.outputs.files.singleFile, classifier: 'javadoc', extension: 'jar.asc'
-                    artifact source: signSourcesJar.outputs.files.singleFile, classifier: 'sources', extension: 'jar.asc'
-                }
-            }
+        uploadArchives {
             repositories {
-                maven {
-                    url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-                    credentials {
-                        username = ossrhUser
-                        password = ossrhPassword
+                mavenDeployer {
+                    // POM signature
+                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                    // Target repository
+                    repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                        authentication(userName: ossrhUser, password: ossrhPassword)
                     }
                 }
             }
         }
+
     }
 }
 
