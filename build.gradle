@@ -93,6 +93,8 @@ if (project.hasProperty('release')) {
                         authentication(userName: ossrhUser, password: ossrhPassword)
                     }
                     pom.project {
+                        name project.name
+                        description project.description
                         packaging 'jar'
                         url 'https://github.com/nemerosa/resources'
 

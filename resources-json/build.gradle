@@ -1,3 +1,5 @@
+description = "General JSON utilities and Lombok aware JSON deserializers"
+
 dependencies {
     compile libraries.jackson_databind
     compile libraries.lombok

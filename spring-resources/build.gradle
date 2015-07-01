@@ -1,3 +1,5 @@
+description = "Spring handling of resources"
+
 dependencies {
     compile project(':resources')
     compile libraries.spring_webmvc
