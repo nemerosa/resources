@@ -85,9 +85,9 @@ if (project.hasProperty('release')) {
                     from components.java
                     artifact sourcesJar
                     artifact javadocJar
-                    artifact source: signJar.outputs.files.singleFile, extension: 'asc'
-                    artifact source: signJavadocJar.outputs.files.singleFile, classifier: 'javadoc', extension: 'asc'
-                    artifact source: signSourcesJar.outputs.files.singleFile, classifier: 'sources', extension: 'asc'
+                    artifact source: signJar.outputs.files.singleFile, extension: 'jar.asc'
+                    artifact source: signJavadocJar.outputs.files.singleFile, classifier: 'javadoc', extension: 'jar.asc'
+                    artifact source: signSourcesJar.outputs.files.singleFile, classifier: 'sources', extension: 'jar.asc'
                 }
             }
             repositories {
@@ -101,6 +101,11 @@ if (project.hasProperty('release')) {
             }
         }
     }
+}
+
+nexusStaging {
+    username = ossrhUser
+    password = ossrhPassword
 }
 
 /**
