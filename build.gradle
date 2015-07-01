@@ -85,7 +85,9 @@ if (project.hasProperty('release')) {
                     from components.java
                     artifact sourcesJar
                     artifact javadocJar
-                    // FIXME Signature files
+                    artifact source: signJar.outputs.files.singleFile, extension: 'asc'
+                    artifact source: signJavadocJar.outputs.files.singleFile, classifier: 'javadoc', extension: 'asc'
+                    artifact source: signSourcesJar.outputs.files.singleFile, classifier: 'sources', extension: 'asc'
                 }
             }
             repositories {
