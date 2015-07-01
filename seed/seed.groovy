@@ -89,13 +89,20 @@ versionDisplay
 versionFile
 build
 uploadArchives
-closeAndPromoteRepository
 -x test
 -Prelease
 --info
 --stacktrace
 --profile
 --parallel
+--console=plain
+'''
+            gradle '''\
+closeAndPromoteRepository
+-Prelease
+--info
+--stacktrace
+--profile
 --console=plain
 '''
             environmentVariables {
