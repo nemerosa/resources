@@ -102,7 +102,6 @@ publish
             }
         }
         publishers {
-            archiveJunit("**/build/test-results/*.xml")
             buildDescription('', '${VERSION_DISPLAY} (${VERSION_FULL})', '', 'n/a')
             tasks(
                     '**/*.java,**/*.groovy,**/*.xml,**/*.html,**/*.js',
