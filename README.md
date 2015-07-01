@@ -25,6 +25,16 @@ signing.secretKeyRingFile=<path to your key ring>
 
 #### Publication configuration
 
+The OSSRH credentials must be available in the `~/.gradle/gradle.properties` file:
+
+```
+# OSS publication
+ossrhUser = <OSSRH user>
+ossrhPassword = <OSSRH password>
+```
+
+Run the following command to publish in a staging repository at https://oss.sonatype.org.
+
 #### Promotion configuration
 
 ## History
