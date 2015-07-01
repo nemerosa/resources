@@ -52,6 +52,7 @@ subprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
     publishing {
         publications {
@@ -69,6 +70,12 @@ subprojects {
     task sourcesJar(type: Jar) {
         classifier = 'sources'
         from sourceSets.main.allSource
+    }
+
+    signing {
+        sign jar
+        sign javadocJar
+        sign sourcesJar
     }
 }
 
