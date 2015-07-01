@@ -16,6 +16,8 @@
  * branch itself.
  */
 
+boolean release = BRANCH.startsWith('release/')
+
 // Build job
 freeStyleJob("${SEED_PROJECT}-${SEED_BRANCH}-build") {
     logRotator(-1, 40)
@@ -54,5 +56,58 @@ build
                 '**/build/**,seed/**',
                 'FIXME', 'TODO', '@Deprecated', true
         )
+        if (release) {
+            buildPipelineTrigger("${SEED_PROJECT}/${SEED_PROJECT}-${SEED_BRANCH}/${SEED_PROJECT}-${SEED_BRANCH}-release") {
+                parameters {
+                    gitRevision(true)
+                }
+            }
+        }
+    }
+}
+
+// Publication job
+if (release) {
+    freeStyleJob("${SEED_PROJECT}-${SEED_BRANCH}-release") {
+        logRotator(-1, 40)
+        deliveryPipelineConfiguration('Commit', 'Release')
+        scm {
+            git {
+                remote {
+                    url PROJECT_SCM_URL
+                    branch "origin/${BRANCH}"
+                }
+                wipeOutWorkspace()
+                localBranch "${BRANCH}"
+            }
+        }
+        jdk 'JDK8u25'
+        steps {
+            gradle '''\
+clean
+versionDisplay
+versionFile
+build
+publish
+-x test
+--info
+--stacktrace
+--profile
+--parallel
+--console=plain
+'''
+            environmentVariables {
+                propertiesFile 'build/version.properties'
+            }
+        }
+        publishers {
+            archiveJunit("**/build/test-results/*.xml")
+            buildDescription('', '${VERSION_DISPLAY} (${VERSION_FULL})', '', 'n/a')
+            tasks(
+                    '**/*.java,**/*.groovy,**/*.xml,**/*.html,**/*.js',
+                    '**/build/**,seed/**',
+                    'FIXME', 'TODO', '@Deprecated', true
+            )
+        }
     }
 }
