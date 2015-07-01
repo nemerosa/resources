@@ -43,56 +43,58 @@ subprojects {
         mavenCentral()
     }
 
+    apply plugin: 'java'
+
 }
 
 /**
  * Publication
  */
 
-// TODO Use a `release` profile
+if (project.hasProperty('release')) {
 
-subprojects {
-    apply plugin: 'java'
+    subprojects {
 
-    task javadocJar(type: Jar) {
-        classifier = 'javadoc'
-        from javadoc
-    }
-
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    // Signature of artifacts
-
-    apply plugin: 'signing'
-
-    signing {
-        sign jar
-        sign javadocJar
-        sign sourcesJar
-    }
-
-    // OSSRH publication
-
-    apply plugin: 'maven-publish'
-
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                artifact sourcesJar
-                artifact javadocJar
-                // FIXME Signature files
-            }
+        task javadocJar(type: Jar) {
+            classifier = 'javadoc'
+            from javadoc
         }
-        repositories {
-            maven {
-                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-                credentials {
-                    username = ossrhUser
-                    password = ossrhPassword
+
+        task sourcesJar(type: Jar) {
+            classifier = 'sources'
+            from sourceSets.main.allSource
+        }
+
+        // Signature of artifacts
+
+        apply plugin: 'signing'
+
+        signing {
+            sign jar
+            sign javadocJar
+            sign sourcesJar
+        }
+
+        // OSSRH publication
+
+        apply plugin: 'maven-publish'
+
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    from components.java
+                    artifact sourcesJar
+                    artifact javadocJar
+                    // FIXME Signature files
+                }
+            }
+            repositories {
+                maven {
+                    url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                    credentials {
+                        username = ossrhUser
+                        password = ossrhPassword
+                    }
                 }
             }
         }
