@@ -130,6 +130,7 @@ if (project.hasProperty('release')) {
 nexusStaging {
     username = ossrhUser
     password = ossrhPassword
+    numberOfRetries = 30
 }
 
 /**
