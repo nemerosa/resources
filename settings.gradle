@@ -1,5 +1,6 @@
 rootProject.name = 'resources'
 
 include ':resources-json'
+include ':resources-json-jsr310'
 include ':resources'
 include ':spring-resources'
