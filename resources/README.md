@@ -1,3 +1,6 @@
+Resources module
+================
+
 The *Resources* module declares a `Resource` and a `Resources` class, which can be used to represent resources. `ResourceDecorator` can also be used to decorate arbitrary objects, using an `URIBuilder`.
 
 ### `Resource` and `Resources`
@@ -29,7 +32,7 @@ In your application, you want to focus on our REST end points and your model, an
 
 You can declare `ResourceDecorator` implementations for the different classes you have to return, and bind them to your REST framework so that returned JSON representations are automatically annotated with links.
 
-> See the [Spring Resources](../spring-resources/README) documentation for details about using this with the Spring Web framework.
+> See the [Spring Resources](../spring-resources) documentation for details about using this with the Spring Web framework.
 
 To declare a decorator:
 
@@ -62,7 +65,7 @@ public class PersonResourceDecorator
 }
 ```
 
-The URI are built in a type safe way by binding to the actual controller methods. The [Spring Resources](../spring-resources/README) provides an implementation of the `URIBuilder` for this purpose.
+The URI are built in a type safe way by binding to the actual controller methods. The [Spring Resources](../spring-resources) provides an implementation of the `URIBuilder` for this purpose.
 
 > Note the use of the `self` method and of a `link` method with a test based on a service call (not described here). Look at the `LinksBuilder` class for a list of all available methods.
 
@@ -93,7 +96,7 @@ mapper = new ResourceObjectMapperFactory(
 ).configure(mapper, resourceContext)
 ```
 
-> See [Spring Resources](../spring-resources/README) to know how to automate the binding with Spring.
+> See [Spring Resources](../spring-resources) to know how to automate the binding with Spring.
 
 In the end, given the following object returned by your REST API:
 
@@ -118,4 +121,4 @@ The binding of the links to the actual Web address is done b the `URIBuilder`.
 
 ### `URIBuilder`
 
-The `URIBuilder` is the magic which allows to bind the creation of the URI with an actual framework. See [Spring Resources](../spring-resources/README) for more information.
+The `URIBuilder` is the magic which allows to bind the creation of the URI with an actual framework. See [Spring Resources](../spring-resources) for more information.
