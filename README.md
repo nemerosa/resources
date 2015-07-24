@@ -2,19 +2,19 @@ The *Resources* project provides utilities to deal with _resources_ in a REST Ja
 
 ## List of modules
 
-[Resources](resources/README)
+[Resources](resources)
 
 > Model for the resources, independent from any representation or framework.
 
-[JSON Resources](resources-json/README)
+[JSON Resources](resources-json)
 
 > General JSON utilities - in particular support for `@Data` Lombok annotations.
 
-[JSON JSR310 Resources](resources-json-jsr310/README)
+[JSON JSR310 Resources](resources-json-jsr310)
 
 > JSON support for JDK8 DateTime API.
 
-[Spring Resources](spring-resources/README)
+[Spring Resources](spring-resources)
 
 > Integration of the resources model and their JSON representation into the Spring Framework.
 
