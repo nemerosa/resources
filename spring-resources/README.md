@@ -1,4 +1,7 @@
-The *Spring Resources* module allows an integration of the [*Resources* module](../resources/README) with the Spring Web framework.
+Spring Resources module
+=======================
+
+The *Spring Resources* module allows an integration of the [*Resources* module](../resources) with the Spring Web framework.
 
 To declare a Spring-aware `URIBuilder` and a message converter which uses yout `ResourceDecorator` instances, configure your Web configuration:
 
