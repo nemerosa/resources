@@ -1,13 +1,13 @@
 package net.nemerosa.resources.json;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyName;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.AnnotatedConstructor;
+import com.fasterxml.jackson.databind.introspect.AnnotatedParameter;
 import com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector;
 
 import java.beans.ConstructorProperties;
 import java.lang.reflect.Constructor;
-import java.util.Collections;
 
 /**
  * This introspector is plugged into a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper} in order
@@ -19,26 +19,25 @@ import java.util.Collections;
 public class ConstructorPropertiesAnnotationIntrospector extends NopAnnotationIntrospector {
 
     @Override
-    public boolean hasCreatorAnnotation(Annotated a) {
-        if (!(a instanceof AnnotatedConstructor)) {
-            return false;
+    public PropertyName findNameForDeserialization(Annotated a) {
+        if (a instanceof AnnotatedParameter) {
+            AnnotatedParameter ap = (AnnotatedParameter) a;
+            if (ap.getOwner() instanceof AnnotatedConstructor) {
+                AnnotatedConstructor ac = (AnnotatedConstructor) ap.getOwner();
+                Constructor<?> c = ac.getAnnotated();
+                ConstructorProperties properties = c.getAnnotation(ConstructorProperties.class);
+                if (properties != null) {
+                    String[] names = properties.value();
+                    int index = ap.getIndex();
+                    if (index < names.length) {
+                        return new PropertyName(
+                                names[index]
+                        );
+                    }
+                }
+            }
         }
-
-        AnnotatedConstructor ac = (AnnotatedConstructor) a;
-
-        Constructor<?> c = ac.getAnnotated();
-        ConstructorProperties properties = c.getAnnotation(ConstructorProperties.class);
-
-        if (properties == null) {
-            return false;
-        }
-
-        for (int i = 0; i < ac.getParameterCount(); i++) {
-            String name = properties.value()[i];
-            JsonProperty jsonProperty =
-                    ProxyAnnotation.of(JsonProperty.class, Collections.singletonMap("value", name));
-            ac.getParameter(i).addOrOverride(jsonProperty);
-        }
-        return true;
+        // Default
+        return super.findNameForDeserialization(a);
     }
 }

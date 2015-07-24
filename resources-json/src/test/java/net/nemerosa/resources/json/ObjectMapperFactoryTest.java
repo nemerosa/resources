@@ -10,13 +10,7 @@ import java.io.IOException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class ConstructorPropertiesAnnotationIntrospectorTest {
-
-    @Data
-    private static class ImmutablePojo {
-        private final String name;
-        private final int value;
-    }
+public class ObjectMapperFactoryTest {
 
     private final ImmutablePojo instance = new ImmutablePojo("foobar", 42);
 
