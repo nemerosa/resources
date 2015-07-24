@@ -34,6 +34,13 @@ You can declare `ResourceDecorator` implementations for the different classes yo
 To declare a decorator:
 
 ```java
+
+@Data
+public class Person {
+   private final int id;
+   private final String name;
+}
+
 public class PersonResourceDecorator
    extends AbstractResourceDecorator<Person> {
    public PersonResourceDecorator() {
@@ -85,6 +92,29 @@ mapper = new ResourceObjectMapperFactory(
    )
 ).configure(mapper, resourceContext)
 ```
+
+> See [Spring Resources](../spring-resources/README) to know how to automate the binding with Spring.
+
+In the end, given the following object returned by your REST API:
+
+```java
+Person person = new Person(5, "Damien");
+```
+
+When the decorator is applied, the return JSON will be like:
+
+```json
+{
+   "id": 5,
+   "name": "Damien",
+   "_self": "https://host/person/5",
+   "_address": "https://host/person/5/address",
+   "_contacts": "https://host/person/5/contacts",
+   "_update": "https://host/person/5/update"
+}
+```
+
+The binding of the links to the actual Web address is done b the `URIBuilder`.
 
 ### `URIBuilder`
 
